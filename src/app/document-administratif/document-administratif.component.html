@@ -1,0 +1,70 @@
+<!--<div class="wrapper">
+    <kendo-expansionpanel title="Default Animation">
+        The name “Colombia” is derived from the last name of the Italian navigator Christopher Columbus. It was conceived by the Venezuelan revolutionary Francisco de Miranda as a reference to all of the New World, but especially to those portions under Spanish law. The name was later adopted by the Republic of Colombia of 1819, formed from the territories of the old Viceroyalty of New Granada (modern-day Colombia, Panama, Venezuela, Ecuador, and northwest Brazil).
+    </kendo-expansionpanel>
+
+    <kendo-expansionpanel title="Custom Duration" [animation]="duration">
+        The name “Guyana” derives from Guiana, the original name for the region that formerly included Guyana (British Guiana), Suriname (Dutch Guiana), French Guiana, and parts of Colombia, Venezuela and Brazil. According to the Oxford English Dictionary, “Guyana” comes from an indigenous Amerindian language and means “land of many waters”.
+    </kendo-expansionpanel>
+
+    <kendo-expansionpanel title="No Animation" [animation]="false">
+        The origin of the name of Ecuador is from Spain. When the Spaniards colonized the land they called it “el ecuador” which translated means “the equator”.
+    </kendo-expansionpanel>
+</div>-->
+<main class="page-content">
+    <div class="container">
+      <h4>Documents administratif</h4>
+      <hr>
+      <div class="row">
+        <div class="form-group col-md-12">
+          <p>touts les documents administratifs fournit par <b>New access</b> :</p>
+         
+        </div>
+  </div></div>
+
+
+  <section class="content" *ngFor="let d of document">
+    <div class="container-fluid">
+      <!-- COLOR PALETTE -->
+      <div class="card card-default color-palette-box">
+        <div class="card-body">
+            <span class="float-left">
+            <h6>{{d.nomDocument}} {{d.id}}</h6></span>
+            <span class="float-right">
+             
+               <span class="k-icon k-i-file-txt" (click)="onSelect(d)" ></span> <span class="k-icon k-i-download" (click)="open()" ></span>
+              
+              </span>
+          
+        </div>
+
+</div>
+</div>
+ </section>      
+ <kendo-window *ngIf="opened"s
+     
+            title="raison document administratif"
+            (close)="close()"
+            [minWidth]="250"
+            [width]="450"
+        >
+        <form [formGroup]="docform" class ="k-form">
+                <fieldset class="k-form-fieldset">
+                    <legend class="k-form-legend">Informations supplementaire </legend>
+                <formly-form [form]="docform" [fields]="docFields" [model]="docModel">
+
+                    <div class="float-right">
+                        <div class="k-form-buttons">
+                        <button type="button" class="k-button" (click)="close()">Annuler</button>
+                        <button type="button" class="k-button k-primary" (click)="close()">Télécharger</button>
+                        </div>
+                    </div>
+
+                </formly-form>
+                </fieldset>
+             
+            </form>
+        </kendo-window>
+        
+
+

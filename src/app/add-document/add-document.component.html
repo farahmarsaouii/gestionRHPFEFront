@@ -1,0 +1,10 @@
+<form [formGroup]="docform" class ="k-form" (ngSubmit)="register(docModel)">
+    <fieldset class="k-form-fieldset">
+        <legend class="k-form-legend">Ajout Document administratif </legend>
+    <formly-form [form]="docform" [fields]="docFields" [model]="docModel">
+        <div class="k-form-buttons">
+      <button type="submit" class="k-button" [disabled]="docform.invalid">Enregistrer</button>
+    </div>
+    </formly-form>
+    </fieldset>
+  </form>

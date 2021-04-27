@@ -1,0 +1,234 @@
+<div class="page-wrapper chiller-theme toggled">
+  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+  <nav id="sidebar" class="sidebar-wrapper" style="border-top-right-radius: 5%;border-bottom-right-radius: 5%;">
+    <div class="sidebar-content">
+      <div class="sidebar-brand">
+        <div class="rounded mx-auto d-block">
+          <a href="#"><img class="img-responsive img-rounded" src="../../assets/img/logo_nwa.png" width="120"
+              height="70"></a>
+        </div>
+        <div id="close-sidebar">
+          <i class="fas fa-times"></i>
+        </div>
+      </div>
+      <div class="sidebar-header">
+        <div class="user-pic">
+          <img class="img-responsive img-rounded"
+            src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+            alt="User picture">
+        </div>
+        <div class="user-info">
+          <span class="user-name">Jhon
+            <strong>Smith</strong>
+          </span>
+          <span class="user-role">Administrator</span>
+          
+        </div>
+      </div>
+      <!-- sidebar-header  -->
+      <div class="sidebar-search">
+        <div>
+          <div class="input-group">
+            <input type="text" class="form-control search-menu" placeholder="rechercher">
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- sidebar-search  -->
+      <div class="sidebar-menu">
+        <ul>
+        <!--   <li class="header-menu">
+            <span>General</span>
+          </li> -->
+          <li class="sidebar-dropdown">
+            <a routerLink="/home">
+              <i class="k-icon k-i-window-maximize"></i>
+              <span>welcome page</span>
+            </a>
+
+          </li>
+          <li class="sidebar-dropdown">
+            <a routerLink="/home/organigram">
+              <i class="k-icon k-i-inherited"></i>
+              <span>Organigramme</span>
+            </a>
+
+          </li>
+
+          <li class="sidebar-dropdown">
+           
+              <a>
+              <i class="k-icon k-i-folder-open"></i>
+              <span>Documents</span>
+            <!--  <span class="badge badge-pill badge-warning">New</span>-->
+            
+            </a>
+
+
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <a routerLink="/home/document">Demande documents
+               
+                  </a>
+                </li>
+                <li>
+                  <a routerLink="/home/demandeDocument">Historique demande</a>
+                </li>
+                <li>
+                  <a routerLink="/home/addDocument">Ajout documents
+                  </a>
+                </li>
+                <li>
+                  <a routerLink="/home/listDocument">Les documents administratif</a>
+                </li>
+              </ul>
+            </div>
+
+
+
+</li>
+          <li class="sidebar-dropdown">
+            <a>
+              <i class="k-icon k-i-page-properties"></i>
+              <span>Configurations</span>
+            
+            </a>
+
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <a routerLink="/home/role">Utilisateurs
+               
+                  </a>
+                </li>
+                <li>
+                  <a routerLink="/home/register">Roles</a>
+                </li>
+                
+              </ul>
+            </div>
+          </li>
+
+
+
+
+        </ul>
+      </div>
+    </div>
+    <!-- sidebar-menu  -->
+
+    <!-- sidebar-content  -->
+    <div class="sidebar-footer" >
+      <a href="#">
+        <i class="fa fa-bell"></i>
+        <span class="badge badge-pill badge-warning notification">3</span>
+      </a>
+      <a href="#">
+        <i class="fa fa-envelope"></i>
+        <span class="badge badge-pill badge-success notification">7</span>
+      </a>
+      <a href="#">
+        <i class="fa fa-cog"></i>
+        <span class="badge-sonar"></span>
+      </a>
+      <a href="#">
+        <i class="fa fa-power-off"></i>
+      </a>
+    </div>
+  </nav>
+  <!-- sidebar-wrapper  -->
+  <!--<main class="page-content">
+      <div class="container">
+        <h2>Pro Sidebar</h2>
+        <hr>
+        <div class="row">
+          <div class="form-group col-md-12">
+            <p>This is a responsive sidebar template with dropdown menu based on bootstrap 4 framework.</p>
+            <p> You can find the complete code on <a href="https://github.com/azouaoui-med/pro-sidebar-template" target="_blank">
+                Github</a>, it contains more themes and background image option</p>
+               <router-outlet></router-outlet>
+          </div>
+        
+         
+          <div class="form-group col-md-12">
+            <div class="alert alert-success" role="alert">
+              <h4 class="alert-heading">New !</h4>
+              <p>New react pro sidebar library is now available on <a href="https://www.npmjs.com/package/react-pro-sidebar" target="_blank">npm</a> <a href="https://github.com/azouaoui-med/react-pro-sidebar" target="_blank">
+                  <img alt="GitHub stars" src="https://img.shields.io/github/stars/azouaoui-med/react-pro-sidebar?style=social" />
+                </a></p>
+              <a href="https://github.com/azouaoui-med/react-pro-sidebar" target="_blank" class="btn btn-sm btn-primary mr-2">
+                Github</a>
+              <a href="https://azouaoui-med.github.io/react-pro-sidebar" target="_blank" class="btn btn-sm btn-success">
+                Demo</a>
+  
+            </div>
+  
+          </div>
+        </div>
+        <h5>More templates</h5>
+        <hr>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="card rounded-0 p-0 shadow-sm">
+              
+              <div class="card-body text-center">
+                <h6 class="card-title">Angular Pro Sidebar</h6>
+                <a href="https://github.com/azouaoui-med/angular-pro-sidebar" target="_blank" class="btn btn-primary btn-sm">Github</a>
+                <a href="https://azouaoui-med.github.io/angular-pro-sidebar/demo/" target="_blank" class="btn btn-success btn-sm">Demo</a>
+                <hr>
+               
+  
+              </div>
+  
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="card rounded-0 p-0 shadow-sm">
+              
+              <div class="card-body text-center">
+                <h6 class="card-title">Angular Dashboard</h6>
+                <a href="https://github.com/azouaoui-med/lightning-admin-angular" target="_blank" class="btn btn-primary btn-sm">Github</a>
+                <a href="https://azouaoui-med.github.io/lightning-admin-angular/demo/" target="_blank" class="btn btn-success btn-sm">Demo</a>
+                <hr>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+     
+  
+        <footer class="text-center">
+          <div class="mb-2">
+            <small>
+              © 2020 made with <i class="fa fa-heart" style="color:red"></i> by - <a target="_blank" rel="noopener noreferrer" href="https://azouaoui.netlify.com">
+                Mohamed Azouaoui
+              </a>
+            </small>
+          </div>
+  
+          <div>
+            
+          </div>
+        </footer>
+  
+      </div>
+  
+    </main>
+
+  </div>-->
+  <!-- page-wrapper -->
+
+  <main class="page-content">
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>

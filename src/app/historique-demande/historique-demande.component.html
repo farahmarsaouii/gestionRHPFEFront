@@ -1,0 +1,28 @@
+<main class="page-content">
+  <div class="container">
+    <h4>Historique de mes demandes :</h4>
+    <hr>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <p>Mes demandes des documents administratifs effectués :</p>
+       
+      </div>
+</div></div>
+
+<section class="content" *ngFor="let d of demandedocument">
+    <div class="container-fluid">
+      <!-- COLOR PALETTE -->
+      <div class="card card-default color-palette-box">
+        <div class="card-body">
+            <span class="float-left">
+              <p>Vous avez télécharger le document : <b>{{d.documentAdministratif.nomDocument}}</b></p>
+              <p>Le : <b>{{d.date}}</b> </p>
+              <p>votre raison est : <b>{{d.documentAdministratif.raisonDocument}}</b></p>
+        
+    
+         </span> 
+        
+</div>
+</div>
+</div>
+ </section>

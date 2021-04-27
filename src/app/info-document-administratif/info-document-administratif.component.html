@@ -1,0 +1,62 @@
+<main class="page-content">
+    <div class="container">
+      <h4>Documents administratif</h4>
+      <hr>
+      <div class="row">
+        <div class="form-group col-md-12">
+          <p>touts les documents administratifs fournit par <b>New access</b> :</p>
+          <button type="button" class="k-button k-primary"(click)="open()">Télécharger</button>
+         <div style="border-style: double; max-width: 900px;"> 
+         
+      <!--  <button class="k-button" (click)="pdf.saveAs('document.pdf')">Save As PDF</button> -->  
+   
+<kendo-pdf-export #pdf paperSize="A4" margin="2cm">
+<div class="address">
+<div class="for">
+ 
+</div>
+</div>
+
+<div class="items">
+  <div>{{document?.nomDocument}}</div>
+  <div>{{document?.titreDocument}}</div>
+<div>{{document?.contenuDocument}}</div>
+</div>
+
+<div class="signature">
+  <div>{{document?.footerDocument}}</div>
+</div>
+</kendo-pdf-export>
+  </div>
+  
+
+
+</div></div>
+</div>
+
+
+</main>
+<kendo-window *ngIf="opened"s
+     
+            title="raison document administratif"
+            (close)="close()"
+            [minWidth]="250"
+            [width]="450"
+        >
+        <form [formGroup]="docform" class ="k-form">
+                <fieldset class="k-form-fieldset">
+                    <legend class="k-form-legend">Informations supplementaire </legend>
+                <formly-form [form]="docform" [fields]="docFields" [model]="docModel">
+
+                    <div class="float-right">
+                        <div class="k-form-buttons">
+                        <button type="button" class="k-button" (click)="close()">Annuler</button>
+                        <button type="button" class="k-button k-primary" (click)="[pdf.saveAs('document.pdf'), saveDemandeDocument()]">Télécharger</button>
+                        </div>
+                    </div>
+
+                </formly-form>
+                </fieldset>
+             
+            </form>
+        </kendo-window>
