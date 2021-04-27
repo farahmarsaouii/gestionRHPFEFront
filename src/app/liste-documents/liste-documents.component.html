@@ -23,7 +23,7 @@
             <span class="float-right">
              
                <span class="k-icon k-i-edit" (click)="edit(d)" ></span>
-               <span class="k-icon k-i-delete" (click)="delete(d)" ></span>
+               <span class="k-icon k-i-delete" (click)="open(d)" ></span>
               
               </span>
           
@@ -31,4 +31,60 @@
 
 </div>
 </div>
-</div>   </main>
+</div>
+<kendo-window *ngIf="opened"
+     
+            title="supprimer document administratif"
+            (close)="close()"
+            [minWidth]="250"
+            [width]="450"
+        >
+        
+                <fieldset class="k-form-fieldset">
+                   
+               <p>voulez-vous supperimer ce document?</p>
+
+                    <div class="float-right">
+                        <div class="k-form-buttons">
+                        <button type="button" class="k-button" (click)="delete()">Supprimer</button>
+                        <button type="button" class="k-button k-primary" (click)="close()">Annuler</button>
+                        </div>
+                    </div>
+
+             
+                </fieldset>
+             
+         
+        </kendo-window> 
+
+
+        <kendo-window *ngIf="op"
+     
+        title="Modifier document administratif"
+        (close)="close()"
+        [minWidth]="250"
+        [width]="650"
+    >
+    
+    <form [formGroup]="docform" class ="k-form">
+      <fieldset class="k-form-fieldset">
+          <legend class="k-form-legend">Modifier document</legend>
+      <formly-form [form]="docform" [fields]="docFields" [model]="docModel">
+
+
+                <div class="float-right">
+                    <div class="k-form-buttons">
+                    <button type="button" class="k-button" (click)="modifier()">Modifier</button>
+                    <button type="button" class="k-button k-primary" (click)="close()">Annuler</button>
+                    </div>
+                </div>
+
+         
+              </formly-form>
+            </fieldset>
+         
+        </form>
+         
+     
+    </kendo-window>
+  </main>

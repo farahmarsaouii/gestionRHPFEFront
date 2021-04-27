@@ -34,8 +34,11 @@ export class DocumentsService {
     addDocument(documentadministratif:any){
         return this.http.post(this.host+"add-document",documentadministratif); 
     }
+    editDocument(documentadministratif:any){
+        return this.http.put(this.host+"updateDocument",documentadministratif); 
+    }
     deleteDocument(id:any){
-        return this.http.delete(this.host+"serve/"+id); 
+        return this.http.delete(this.host+"removedocument/"+id); 
     }
 
 }
