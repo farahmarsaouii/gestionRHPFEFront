@@ -46,6 +46,7 @@ this.op=true;
       this.opened = true;
   }
   public modifier(){
+    this.docModel.id=this.doc.id;
     this.documentService.editDocument(this.docModel).subscribe((data)=>this.msg=data);
   }
   docform = new FormGroup({});

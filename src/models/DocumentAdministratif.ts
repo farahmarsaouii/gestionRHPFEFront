@@ -1,3 +1,6 @@
+import { DemandeDocumentAdministratif } from "./DemandeDocument";
+import { User } from "./user";
+
 export class DocumentAdministratif{
     id!: number;
     nomDocument!:string;
@@ -9,4 +12,7 @@ export class DocumentAdministratif{
     contenuDocument: string | undefined;
     headerDocument: string | undefined;
     footerDocument: string | undefined;
+    demandeDocument!:DemandeDocumentAdministratif;
+    drh!:User;
+
 }

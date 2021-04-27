@@ -10,6 +10,7 @@ import { InfoDocumentAdministratifComponent } from '../info-document-administrat
 import { ListeDocumentsComponent } from '../liste-documents/liste-documents.component';
 import { LoginComponent } from '../login/login.component';
 import { OrganigramComponent } from '../organigram/organigram.component';
+import { PlanDeCarriereComponent } from '../plan-de-carriere/plan-de-carriere.component';
 import { RegisterComponent } from '../register/register.component';
 import { RoleComponent } from '../role/role.component';
 import { TestComponent } from '../test/test.component';
@@ -27,6 +28,7 @@ import { TestComponent } from '../test/test.component';
         {path: 'demandeDocument', component: HistoriqueDemandeComponent},
         {path: 'addDocument', component: AddDocumentComponent},
         {path: 'listDocument', component: ListeDocumentsComponent},
+        {path: 'planDeCarriere', component: PlanDeCarriereComponent},
         {path:'infoDocumentAdministratif/:id',component : InfoDocumentAdministratifComponent}
       ]},
      //,canActivate:[ControlService]

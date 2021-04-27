@@ -34,6 +34,7 @@ import { DemandeDocumentsService } from 'src/services/demandeDocuments-service';
 import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
 import { AddDocumentComponent } from './add-document/add-document.component';
 import { ListeDocumentsComponent } from './liste-documents/liste-documents.component';
+import { PlanDeCarriereComponent } from './plan-de-carriere/plan-de-carriere.component';
 
 
 
@@ -53,7 +54,8 @@ import { ListeDocumentsComponent } from './liste-documents/liste-documents.compo
     InfoDocumentAdministratifComponent,
     HistoriqueDemandeComponent,
     AddDocumentComponent,
-    ListeDocumentsComponent
+    ListeDocumentsComponent,
+    PlanDeCarriereComponent
   ],
   imports: [
     BrowserModule,
