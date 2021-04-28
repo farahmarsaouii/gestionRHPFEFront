@@ -1,5 +1,7 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { DocumentAdministratif } from 'src/models/DocumentAdministratif';
 
@@ -16,9 +18,13 @@ export class ListeDocumentsComponent implements OnInit {
   public opened = false;
   public op =false;
   public actionsLayout = 'normal';
-  constructor(private documentService:DocumentsService) { }
+  constructor(private documentService:DocumentsService,public router: Router) { }
 
   ngOnInit(): void {
+
+this.getAllDocuments();
+  }
+  private getAllDocuments(){
     let resp=this.documentService.getDocuments();
     resp.subscribe((data)=>this.document=data);
     console.log(resp);
@@ -47,7 +53,11 @@ this.op=true;
   }
   public modifier(){
     this.docModel.id=this.doc.id;
+    
     this.documentService.editDocument(this.docModel).subscribe((data)=>this.msg=data);
+    this.getAllDocuments();
+    this.router.navigateByUrl('/home/listDocument');
+    this.close();
   }
   docform = new FormGroup({});
 docModel = new DocumentAdministratif();
