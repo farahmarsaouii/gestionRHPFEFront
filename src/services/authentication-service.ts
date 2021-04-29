@@ -17,6 +17,7 @@ export class AuthenticationService {
    
     jwt: string = "";
     username: string = "";
+    user!:User;
     //    role:any ="";
 
     constructor(private http: HttpClient) {
@@ -31,10 +32,11 @@ export class AuthenticationService {
     }
     saveToken(jwt: string) {
         this.jwtToken = jwt;
-        localStorage.setItem("token", this.jwtToken);
+        localStorage.setItem("tokenUser", this.jwtToken);
         let jwtHelper = new JwtHelperService();
         this.username= jwtHelper.decodeToken(this.jwtToken).sub;
         localStorage.setItem('user', jwtHelper.decodeToken(this.jwtToken).sub);
+      
        
         // localStorage.setItem('privilege', jwtHelper.decodeToken(this.jwtToken).privileges);
       //  this.privileges = jwtHelper.decodeToken(this.jwtToken).privileges[1]['authority'];
@@ -61,10 +63,10 @@ export class AuthenticationService {
         
     };*/
     
-    saveTask(task: any) {
-        let headers =new HttpHeaders().set('Authorization' , localStorage.getItem('tokenUser') || []);
-        return this.http.post(this.host + "tasks", task, {headers});
-    }
+   // saveTask(task: any) {
+    //    let headers =new HttpHeaders().set('Authorization' , localStorage.getItem('tokenUser') || []);
+   //     return this.http.post(this.host + "tasks", task, {headers});
+  //  }
     findUserByUserName(usernameu:string): Observable<User>{
         let headers =new HttpHeaders().set('Authorization' , localStorage.getItem('tokenUser') || []);
         return this.http.get<User>(this.host + "userbyUsername/"+usernameu,{headers});

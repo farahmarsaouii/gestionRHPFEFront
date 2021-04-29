@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { PlanDeCarriere } from "src/models/PlanDeCarriere";
+import { Poste } from "src/models/Poste";
 
 
 @Injectable()
@@ -25,5 +26,13 @@ export class PlanDeCarriereService {
     deletePlanDeCarriere(id:any){
         return this.http.delete(this.host+"removePlanDeCarriere/"+id); 
     }
+  getPlanDeCarriereParPoste(idposte:any): Observable<PlanDeCarriere>{
+    let params =new HttpParams().set('idPoste',idposte)
+    return this.http.get<PlanDeCarriere>(this.host+"planDeCarrieresParPoste",{params});
+  }
+  getPosteparUser(idUser:any): Observable<PlanDeCarriere>{
+    let params =new HttpParams().set('idUser',idUser)
+    return this.http.get<PlanDeCarriere>(this.host+"planDeCarrieresParUser",{params});   
+  }
 
 }

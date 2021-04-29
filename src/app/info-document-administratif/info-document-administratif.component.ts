@@ -33,8 +33,8 @@ export class InfoDocumentAdministratifComponent implements OnInit {
   let resp=this.docService.getDocument(id);
     resp.subscribe((data)=>this.document=data);
    
-    let rep=this.userservice.findUserByUserName(localStorage.getItem("user")|| '{}');
-     rep.subscribe((data)=>this.user=data);
+   let rep=this.userservice.findUserByUserName(localStorage.getItem("user")|| '{}');
+    rep.subscribe((data)=>this.user=data);
   }
   saveDemandeDocument(){
     

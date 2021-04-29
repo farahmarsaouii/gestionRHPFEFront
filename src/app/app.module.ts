@@ -35,6 +35,12 @@ import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
 import { AddDocumentComponent } from './add-document/add-document.component';
 import { ListeDocumentsComponent } from './liste-documents/liste-documents.component';
 import { PlanDeCarriereComponent } from './plan-de-carriere/plan-de-carriere.component';
+import { CompetenceService } from 'src/services/competence-service';
+import { FactureService } from 'src/services/facture-service';
+import { PlanDeCarriereService } from 'src/services/planDeCarriere-service';
+import { PosteService } from 'src/services/poste-service';
+import { SousCompetenceService } from 'src/services/sousCompetence-service';
+import { TypeFactureService } from 'src/services/typeFacture-service';
 
 
 
@@ -78,7 +84,9 @@ import { PlanDeCarriereComponent } from './plan-de-carriere/plan-de-carriere.com
     //FormlyBootstrapModule,
    
   ],
-  providers: [AuthenticationService,ControlService,DocumentsService,DemandeDocumentsService],
+  providers: [AuthenticationService,ControlService,DocumentsService,DemandeDocumentsService,
+    CompetenceService,FactureService,PlanDeCarriereService,PosteService,SousCompetenceService,
+    TypeFactureService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

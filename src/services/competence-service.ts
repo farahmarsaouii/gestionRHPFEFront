@@ -20,5 +20,5 @@ export class CompetenceService {
     deleteCompetence(id:any){
         return this.http.delete(this.host+"removeCompetence/"+id); 
     }
-
+   
 }

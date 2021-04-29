@@ -4,14 +4,14 @@ import { User } from "./user";
 export class DocumentAdministratif{
     id!: number;
     nomDocument!:string;
-    type: string | undefined;
+    type!: string;
     dateCreation!: Date;
     dateModf!: Date;
    
-    titreDocument: string | undefined;
-    contenuDocument: string | undefined;
-    headerDocument: string | undefined;
-    footerDocument: string | undefined;
+    titreDocument!: string;
+    contenuDocument!: string;
+    headerDocument!: string;
+    footerDocument!: string;
     demandeDocument!:DemandeDocumentAdministratif;
     drh!:User;
 
