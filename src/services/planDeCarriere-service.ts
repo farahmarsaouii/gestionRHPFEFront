@@ -26,11 +26,11 @@ export class PlanDeCarriereService {
     deletePlanDeCarriere(id:any){
         return this.http.delete(this.host+"removePlanDeCarriere/"+id); 
     }
-  getPlanDeCarriereParPoste(idposte:any): Observable<PlanDeCarriere>{
+  /*getPlanDeCarriereParPoste(idposte:any): Observable<PlanDeCarriere>{
     let params =new HttpParams().set('idPoste',idposte)
     return this.http.get<PlanDeCarriere>(this.host+"planDeCarrieresParPoste",{params});
-  }
-  getPosteparUser(idUser:any): Observable<PlanDeCarriere>{
+  }*/
+  getPlanDeCarriereParUser(idUser:any): Observable<PlanDeCarriere>{
     let params =new HttpParams().set('idUser',idUser)
     return this.http.get<PlanDeCarriere>(this.host+"planDeCarrieresParUser",{params});   
   }

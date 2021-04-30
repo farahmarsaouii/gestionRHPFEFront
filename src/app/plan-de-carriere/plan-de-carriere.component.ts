@@ -14,28 +14,34 @@ import { PlanDeCarriereService } from 'src/services/planDeCarriere-service';
   styleUrls: ['./plan-de-carriere.component.css']
 })
 export class PlanDeCarriereComponent implements OnInit {
+  plancarriere!:PlanDeCarriere;
+  user: User = new User();
+  u: User = new User;
+  poste!:Poste;
+  id:any;
+  listeCompetenceparplandecarriere!:Array<Competence>;
 
   constructor(private planDeCarriereService:PlanDeCarriereService,private authenticationService:AuthenticationService) { }
-plancarriere!:PlanDeCarriere;
-user!: User;
-poste!:Poste;
-listeCompetenceparplandecarriere!:Array<Competence>;
+
+
+
   ngOnInit(): void {
-    let rep=this.authenticationService.findUserByUserName(localStorage.getItem("user")|| '{}');
-    rep.subscribe((data)=>this.user=data);
-
-   
+    let rep = this.authenticationService.findUserByUserName(localStorage.getItem("user") || '{}')
+    .subscribe((data) => {
+      this.user = data;
+      console.log(this.user);
+      this.getCompetenceParPlanDeCarriereEmployeeParPoste();
+    });
+    
+    
   }
+
 getCompetenceParPlanDeCarriereEmployeeParPoste(){
-  //id current user
-  let jwtHelper = new JwtHelperService();
-
- // this.user =this.authenticationService.findUserByUserName( jwtHelper.decodeToken(localStorage.getItem('tokenUser') || []).sub);
- let respo=this.planDeCarriereService.getPosteparUser(this.user.id);
- respo.subscribe((data)=>this.plancarriere=data);
-
-  let resp=this.planDeCarriereService.getPlanDeCarriereParPoste(this.plancarriere.poste.id);
-  resp.subscribe((data)=>this.plancarriere=data);
-  this.listeCompetenceparplandecarriere=this.plancarriere.competences;
+  
+const userId = this.user.id;
+ this.planDeCarriereService.getPlanDeCarriereParUser(userId)
+ .subscribe((data)=>{
+   this.listeCompetenceparplandecarriere=data.competences;
+  });
 }
 }

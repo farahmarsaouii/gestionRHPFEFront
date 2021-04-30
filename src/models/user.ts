@@ -1,4 +1,5 @@
 
+import { Collection } from "typescript";
 import { DemandeDocumentAdministratif } from "./DemandeDocument";
 import { DocumentAdministratif } from "./DocumentAdministratif";
 import { PlanDeCarriere } from "./PlanDeCarriere";
@@ -7,13 +8,13 @@ export class User{
     id!: number;
     userName!:string;
     password!:string;
-    email:string | undefined;
+    email!:string;
     cin!:string;
-    photo:string | undefined;
+    photo!:string;
     repassword!:string;
-    planDeCarriere:Array<PlanDeCarriere> | undefined;
-    demandeDocument:Array<DemandeDocumentAdministratif> | undefined;
-    documentAdministratif:Array<DocumentAdministratif> | undefined;
+    planDeCarriere!:Collection<PlanDeCarriere>;
+    demandeDocument!:Collection<DemandeDocumentAdministratif>;
+    documentAdministratif!:Collection<DocumentAdministratif>;
 
 
 /*constructor(id:number,userName:string,password:string,email:string,cin:string)
