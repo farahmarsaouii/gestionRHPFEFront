@@ -6,6 +6,8 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 import { User } from "src/models/user";
 
 import { Observable } from "rxjs";
+import { Equipe } from "src/models/Equipe";
+import { Role } from "src/models/Role";
 
 @Injectable()
 export class AuthenticationService {
@@ -70,6 +72,11 @@ export class AuthenticationService {
     findUserByUserName(usernameu:string): Observable<User>{
         let headers =new HttpHeaders().set('Authorization' , localStorage.getItem('tokenUser') || []);
         return this.http.get<User>(this.host + "userbyUsername/"+usernameu,{headers});
+    }
+    findUsersByEquipeAndRole(idequipe:any): Observable<User[]>{
+        let headers =new HttpHeaders().set('Authorization' , localStorage.getItem('tokenUser') || []);
+        let params =new HttpParams().set('idequipe',idequipe);
+        return this.http.get<User[]>(this.host + "getByEquipeAndRole",{params,headers});
     }
   
 

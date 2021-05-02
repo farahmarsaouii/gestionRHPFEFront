@@ -2,7 +2,9 @@
 import { Collection } from "typescript";
 import { DemandeDocumentAdministratif } from "./DemandeDocument";
 import { DocumentAdministratif } from "./DocumentAdministratif";
+import { Equipe } from "./Equipe";
 import { PlanDeCarriere } from "./PlanDeCarriere";
+import { Role } from "./Role";
 
 export class User{
     id!: number;
@@ -15,6 +17,8 @@ export class User{
     planDeCarriere!:Collection<PlanDeCarriere>;
     demandeDocument!:Collection<DemandeDocumentAdministratif>;
     documentAdministratif!:Collection<DocumentAdministratif>;
+    equipe!:Equipe;
+    role!:Role;
 
 
 /*constructor(id:number,userName:string,password:string,email:string,cin:string)

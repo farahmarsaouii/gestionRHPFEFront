@@ -5,11 +5,13 @@ import { AdminHomeComponent } from '../admin-home/admin-home.component';
 import { ControlService } from '../control.service';
     import { DashboardComponent } from '../dashboard/dashboard.component'
 import { DocumentAdministratifComponent } from '../document-administratif/document-administratif.component';
+import { EquipeManagerComponent } from '../equipe-manager/equipe-manager.component';
 import { HistoriqueDemandeComponent } from '../historique-demande/historique-demande.component';
 import { InfoDocumentAdministratifComponent } from '../info-document-administratif/info-document-administratif.component';
 import { ListeDocumentsComponent } from '../liste-documents/liste-documents.component';
 import { LoginComponent } from '../login/login.component';
 import { OrganigramComponent } from '../organigram/organigram.component';
+import { PlanDeCarriereUserComponent } from '../plan-de-carriere-user/plan-de-carriere-user.component';
 import { PlanDeCarriereComponent } from '../plan-de-carriere/plan-de-carriere.component';
 import { RegisterComponent } from '../register/register.component';
 import { RoleComponent } from '../role/role.component';
@@ -29,6 +31,8 @@ import { TestComponent } from '../test/test.component';
         {path: 'addDocument', component: AddDocumentComponent},
         {path: 'listDocument', component: ListeDocumentsComponent},
         {path: 'planDeCarriere', component: PlanDeCarriereComponent},
+        {path: 'equipeManager', component: EquipeManagerComponent},
+        {path: 'planDeCarriereUser/:id', component: PlanDeCarriereUserComponent},
         {path:'infoDocumentAdministratif/:id',component : InfoDocumentAdministratifComponent}
       ]},
      //,canActivate:[ControlService]

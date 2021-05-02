@@ -41,6 +41,8 @@ import { PlanDeCarriereService } from 'src/services/planDeCarriere-service';
 import { PosteService } from 'src/services/poste-service';
 import { SousCompetenceService } from 'src/services/sousCompetence-service';
 import { TypeFactureService } from 'src/services/typeFacture-service';
+import { EquipeManagerComponent } from './equipe-manager/equipe-manager.component';
+import { PlanDeCarriereUserComponent } from './plan-de-carriere-user/plan-de-carriere-user.component';
 
 
 
@@ -61,7 +63,9 @@ import { TypeFactureService } from 'src/services/typeFacture-service';
     HistoriqueDemandeComponent,
     AddDocumentComponent,
     ListeDocumentsComponent,
-    PlanDeCarriereComponent
+    PlanDeCarriereComponent,
+    EquipeManagerComponent,
+    PlanDeCarriereUserComponent
   ],
   imports: [
     BrowserModule,
