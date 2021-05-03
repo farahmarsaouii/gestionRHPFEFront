@@ -35,6 +35,7 @@ public clearForm(): void {
 }*/
 constructor(private formBuilder: FormBuilder,private authService :AuthenticationService,private router:Router) { }
 ngOnInit(): void {
+  
 }
 feedback: any = {};
 Userform = new FormGroup({});
@@ -110,7 +111,21 @@ UserModel = new User();
     validation : {
       messages: {
       required :'la vérification du mot de passe est obligatoire !' } }
-  }
+  },
+
+    {
+      key: 'Role',
+      type: 'select',
+      templateOptions: {
+        label: 'Role',
+        options: [
+          { id: '1', name: 'Soccer' },
+          { id: '2', name: 'Basketball' },
+        ],
+        valueProp: 'id',
+        labelProp: 'name',
+      },
+    },
 
 ];
  
