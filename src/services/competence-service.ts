@@ -11,6 +11,7 @@ export class CompetenceService {
     getCompetences(): Observable<Competence[]> {
         return this.http.get<Competence[]>(this.host + "competences");
     }
+    
     addCompetence(Competence:any){
         return this.http.post(this.host+"add-competence",Competence); 
     }
@@ -20,5 +21,12 @@ export class CompetenceService {
     deleteCompetence(id:any){
         return this.http.delete(this.host+"removeCompetence/"+id); 
     }
+   
+    getCompetencesPoste(idposte:any): Observable<Competence[]> {
+        let params =new HttpParams().set('poste-id',idposte)
+        return this.http.get<Competence[]>(this.host +"findCompetencesByPoste",{params});
+    }
+
+
    
 }

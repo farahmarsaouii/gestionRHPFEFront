@@ -49,7 +49,8 @@ feedback: any = {};
 Userform = new FormGroup({});
 UserModel = new User();
 options: FormlyFormOptions = {};
-  UserFields: FormlyFieldConfig[] = [{
+  UserFields: FormlyFieldConfig[] = [
+    {
     key: 'userName',
     type: 'input',
     templateOptions: {
@@ -123,7 +124,7 @@ options: FormlyFormOptions = {};
   },
 
     {
-      key: 'Role',
+      key: 'role',
       type: 'select',
       templateOptions: {
         label: 'Role :',
