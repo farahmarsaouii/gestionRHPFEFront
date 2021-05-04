@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder }  from '@angular/forms';
 import { Router } from '@angular/router';
-import { FormlyFieldConfig } from '@ngx-formly/core';
+import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
+import { Role } from 'src/models/Role';
 import { User } from 'src/models/user';
 import { AuthenticationService } from 'src/services/authentication-service';
+import { EquipeService } from 'src/services/equipe-service';
 
 
 
@@ -33,13 +35,20 @@ export class RegisterComponent implements OnInit {/*  registerForm: FormGroup = 
 public clearForm(): void {
     this.registerForm.reset();
 }*/
-constructor(private formBuilder: FormBuilder,private authService :AuthenticationService,private router:Router) { }
+roles!:Role[];
+constructor(private formBuilder: FormBuilder,private authenticationService :AuthenticationService,private router:Router,
+  private equipeService:EquipeService) { }
 ngOnInit(): void {
-  
+ 
+ 
 }
+
+
+
 feedback: any = {};
 Userform = new FormGroup({});
 UserModel = new User();
+options: FormlyFormOptions = {};
   UserFields: FormlyFieldConfig[] = [{
     key: 'userName',
     type: 'input',
@@ -117,28 +126,37 @@ UserModel = new User();
       key: 'Role',
       type: 'select',
       templateOptions: {
-        label: 'Role',
-        options: [
-          { id: '1', name: 'Soccer' },
-          { id: '2', name: 'Basketball' },
-        ],
+        label: 'Role :',
+        options:this.authenticationService.findRoles(),
+        
         valueProp: 'id',
-        labelProp: 'name',
+        labelProp: 'role',
+      },
+    },
+    {
+      key: 'Equipe',
+      type: 'select',
+      templateOptions: {
+        label: 'Equipe :',
+        options:this.equipeService.getEquipes(),
+        valueProp: 'id',
+        labelProp: 'nomEquipe',
       },
     },
 
 ];
  
   register(user :User) {
+   
     console.log(user);
-  
+    console.log(this.roles);
       if(user.password!=user.repassword){
         alert("Use the same password");
       }
       else{
 
         
-          this.authService.register(user)
+          this.authenticationService.register(user)
           .subscribe(resp=>{
 
             this.feedback = {type: 'success', message: 'successful!'};

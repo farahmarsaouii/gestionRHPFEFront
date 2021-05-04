@@ -45,10 +45,12 @@
 <form [formGroup]="Userform" class ="k-form" (ngSubmit)="register(UserModel)">
     <fieldset class="k-form-fieldset">
         <legend class="k-form-legend">Ajout utilisateur </legend>
-    <formly-form [form]="Userform" [fields]="UserFields" [model]="UserModel">
+    <formly-form [form]="Userform" [fields]="UserFields" [options]="options" [model]="UserModel">
         <div class="k-form-buttons">
       <button type="submit" class="k-button" [disabled]="Userform.invalid">Enregistrer</button>
     </div>
+    <p>{{UserModel| json}} </p>
+
     </formly-form>
     </fieldset>
   </form>

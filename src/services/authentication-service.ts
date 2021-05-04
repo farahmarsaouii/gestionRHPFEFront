@@ -78,8 +78,11 @@ export class AuthenticationService {
         let params =new HttpParams().set('idequipe',idequipe);
         return this.http.get<User[]>(this.host + "getByEquipeAndRole",{params,headers});
     }
+  findRoles(): Observable<Role[]>{
+    let headers =new HttpHeaders().set('Authorization' , localStorage.getItem('tokenUser') || []);
+    return this.http.get<Role[]>(this.host + "getRoles");
   
-
+  }
     loadToken() {
         this.jwtToken = localStorage.getItem('tokenUser');
         return this.jwtToken;

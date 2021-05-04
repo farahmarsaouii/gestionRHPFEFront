@@ -43,6 +43,7 @@ import { SousCompetenceService } from 'src/services/sousCompetence-service';
 import { TypeFactureService } from 'src/services/typeFacture-service';
 import { EquipeManagerComponent } from './equipe-manager/equipe-manager.component';
 import { PlanDeCarriereUserComponent } from './plan-de-carriere-user/plan-de-carriere-user.component';
+import { EquipeService } from 'src/services/equipe-service';
 
 
 
@@ -90,7 +91,7 @@ import { PlanDeCarriereUserComponent } from './plan-de-carriere-user/plan-de-car
   ],
   providers: [AuthenticationService,ControlService,DocumentsService,DemandeDocumentsService,
     CompetenceService,FactureService,PlanDeCarriereService,PosteService,SousCompetenceService,
-    TypeFactureService],
+    TypeFactureService,EquipeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
