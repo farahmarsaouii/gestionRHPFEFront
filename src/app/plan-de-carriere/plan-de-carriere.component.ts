@@ -29,7 +29,6 @@ export class PlanDeCarriereComponent implements OnInit {
     let rep = this.authenticationService.findUserByUserName(localStorage.getItem("user") || '{}')
     .subscribe((data) => {
       this.user = data;
-      console.log(this.user);
       this.getCompetenceParPlanDeCarriereEmployeeParPoste();
     });
     
@@ -44,4 +43,8 @@ const userId = this.user.id;
    this.listeCompetenceparplandecarriere=data.competences;
   });
 }
+
+
+
+
 }

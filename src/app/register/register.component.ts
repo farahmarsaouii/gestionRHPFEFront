@@ -36,6 +36,7 @@ public clearForm(): void {
     this.registerForm.reset();
 }*/
 roles!:Role[];
+roleUser!:Role;
 constructor(private formBuilder: FormBuilder,private authenticationService :AuthenticationService,private router:Router,
   private equipeService:EquipeService) { }
 ngOnInit(): void {
@@ -56,6 +57,7 @@ options: FormlyFormOptions = {};
     templateOptions: {
       type: 'nom',
       label: 'Nom',
+      
       placeholder: 'Nom utilisateur',
       required: true,
     },
@@ -146,18 +148,25 @@ options: FormlyFormOptions = {};
     },
 
 ];
- 
-  register(user :User) {
+ userBack !: User;
+  register(user :any) {
    
-    console.log(user);
+    console.log(user.role);var id=user.role.value;
+var role=user.role.label;
+//var userapi= new User(user.,c,,user)
     console.log(this.roles);
+    this.userBack=user;
+    this.userBack.role.id=id;
+    this.userBack.role.role=role;
+
+    
       if(user.password!=user.repassword){
         alert("Use the same password");
       }
       else{
 
         
-          this.authenticationService.register(user)
+          this.authenticationService.register(this.userBack)
           .subscribe(resp=>{
 
             this.feedback = {type: 'success', message: 'successful!'};
