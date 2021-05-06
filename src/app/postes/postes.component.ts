@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FormlyFieldConfig } from '@ngx-formly/core';
 import { Poste } from 'src/models/Poste';
 import { PosteService } from 'src/services/poste-service';
 
@@ -12,7 +14,11 @@ export class PostesComponent implements OnInit {
 
   constructor(private posteService:PosteService,private router:Router) { }
   postes!:Poste[];
+  msg!:any;
   public opened = false;
+  public o = false;
+  poste = new Poste;
+  public d =false;
 
 
   ngOnInit(): void {
@@ -25,12 +31,89 @@ export class PostesComponent implements OnInit {
     this.router.navigate(['/home/competencePoste',poste.id]);
 
   }
-  public close() {
+  posteform = new FormGroup({});
+ // posteModel = new Poste();
+  posteModel = this.poste;
+  posteFields: FormlyFieldConfig[] = [
 
+    {
+      key: 'nomPoste',
+      type: 'input',
+      templateOptions: {
+        type: 'nomPoste',
+        label: 'Nom poste :',
+       placeholder: 'Nom du poste',
+        required: true,
+      },
+      validation: {
+        messages: {
+          required: 'nom du poste est obligatoire !'
+        }
+      },
+
+
+    },
+    {
+      key: 'descriptionPoste',
+      type: 'input',
+      templateOptions: {
+        type: 'descriptionPoste',
+        label: 'Description poste :',
+        placeholder: 'Desciption du poste',
+        required: true,
+      },
+      validation: {
+        messages: {
+          required: 'Description du poste est obligatoire !'
+        }
+      },
+    },
+  ]
+
+  public close() {
+this.o=false;
     this.opened = false;
+    this.d=false;
 }
   public open() {
     this.opened = true;
 }
 
+ajouter(poste:any){
+  this.posteService.addPoste(poste).subscribe((data)=>{
+    this.msg=data;
+   });
+   this.opened = false;
+  
+}
+
+
+ModifierPoste(poste : any){
+this.posteService.editPoste(poste).subscribe((data)=>{
+  this.msg=data;
+ });
+ this.o = false;
+}
+
+delete(){
+  this.posteService.deletePoste(this.poste.id).subscribe((data)=>{
+    this.msg=data;
+   });
+   this.d=false;
+  }
+
+
+annuler(){
+this.opened=false;
+}
+openedit(poste:Poste){
+this.o=true;
+this.poste=poste;
+}
+openDelete(poste:any){
+  this.poste=poste;
+  this.d=true;
+
+
+}
 }

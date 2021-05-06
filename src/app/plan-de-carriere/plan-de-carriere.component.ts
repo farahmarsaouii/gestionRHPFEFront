@@ -6,6 +6,7 @@ import { Poste } from 'src/models/Poste';
 import { User } from 'src/models/user';
 import { AuthenticationService } from 'src/services/authentication-service';
 import { PlanDeCarriereService } from 'src/services/planDeCarriere-service';
+import { SousCompetenceService } from 'src/services/sousCompetence-service';
 
 
 @Component({
@@ -19,30 +20,29 @@ export class PlanDeCarriereComponent implements OnInit {
   u: User = new User;
   poste!:Poste;
   id:any;
-  listeCompetenceparplandecarriere!:Array<Competence>;
+  reponse:any;
+  map:any;
+ 
 
-  constructor(private planDeCarriereService:PlanDeCarriereService,private authenticationService:AuthenticationService) { }
+  constructor(private sousCompetenceService:SousCompetenceService,private authenticationService:AuthenticationService) { }
 
 
 
   ngOnInit(): void {
-    let rep = this.authenticationService.findUserByUserName(localStorage.getItem("user") || '{}')
+   this.authenticationService.findUserByUserName(localStorage.getItem("user") || '{}')
     .subscribe((data) => {
-      this.user = data;
-      this.getCompetenceParPlanDeCarriereEmployeeParPoste();
+     // this.map=this.getSousCompetenceParCompetenceparUser(data.id);
+     this.sousCompetenceService.getSousCompetenceParCompetenceparUser(data.id).subscribe((data) => {
+      this.map=data;
+   
+    });
+
     });
     
-    
   }
+    
 
-getCompetenceParPlanDeCarriereEmployeeParPoste(){
   
-const userId = this.user.id;
- this.planDeCarriereService.getPlanDeCarriereParUser(userId)
- .subscribe((data)=>{
-   this.listeCompetenceparplandecarriere=data.competences;
-  });
-}
 
 
 

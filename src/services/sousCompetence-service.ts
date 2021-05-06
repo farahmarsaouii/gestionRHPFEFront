@@ -25,8 +25,8 @@ export class SousCompetenceService {
     deleteSousCompetence(id:any){
         return this.http.delete(this.host+"removeSousCompetence/"+id); 
     }
-    getSousCompetenceparuser(idUser:any): Observable<SousCompetence> {
+    getSousCompetenceParCompetenceparUser(idUser:any){
         let params =new HttpParams().set('idUser',idUser)
-         return this.http.get<SousCompetence>(this.host+"sousCompetencesparUser",{params});
+         return this.http.get(this.host+"getSousCompetenceParCompetenceparUser",{params});
      }
 }

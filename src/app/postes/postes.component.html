@@ -9,7 +9,7 @@
         </div>
   </div>
 
-  <button kendoButton look="outline" [primary]="true">Ajouter poste</button></div>
+  <button kendoButton look="outline" [primary]="true" (click)="open()">Ajouter poste</button></div>
 <br>
 <div>
   <section class="content" *ngFor="let poste of postes">
@@ -20,7 +20,10 @@
             <span class="float-left">
             <h6>{{poste.nomPoste}}</h6></span>
             <span class="float-right">
-                <button kendoButton (click)="competences(poste)">Competence</button>
+             
+                <button kendoButton look="outline" [primary]="true" (click)="competences(poste)" >Competences</button>
+                <button kendoButton icon="edit" look="outline" [primary]="true"  (click)="openedit(poste)" ></button>
+                <button kendoButton icon="delete" look="outline" [primary]="true" (click)="openDelete(poste)"></button>
               </span>
           
         </div>
@@ -29,10 +32,57 @@
 </div>
  </section> </div> 
  </main>
- <kendo-dialog title="Please confirm" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="450">
-  <p style="margin: 30px; text-align: center;">Are you sure you want to continue?</p>
+ <kendo-dialog title="Ajout poste" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="450">
+
+  
+    <form [formGroup]="posteform" class ="k-form">
+      <fieldset class="k-form-fieldset">
+          <legend class="k-form-legend">voulez vous ajouter un poste  </legend>
+      <formly-form [form]="posteform" [fields]="posteFields" [model]="posteModel">
+
+          <div class="float-right">
+              <div class="k-form-buttons">
+                <button kendoButton (click)="ajouter(posteModel)" [primary]="true">Ajout</button>
+                <button kendoButton (click)="close()" >Annuler</button>
+              </div>
+          </div>
+
+      </formly-form>
+      </fieldset>
+   
+  </form>
+
+ 
+ 
+</kendo-dialog>
+<kendo-dialog title="Modifier poste" *ngIf="o" (close)="close()" [minWidth]="250" [width]="450">
+
+  
+  <form [formGroup]="posteform" class ="k-form">
+    <fieldset class="k-form-fieldset">
+        <legend class="k-form-legend">voulez vous Modifier un poste  </legend>
+    <formly-form [form]="posteform" [fields]="posteFields" [model]="posteModel">
+
+        <div class="float-right">
+            <div class="k-form-buttons">
+              <button kendoButton (click)="ModifierPoste(posteModel)" [primary]="true">Modifier</button>
+              <button kendoButton (click)="close()" >Annuler</button>
+            </div>
+        </div>
+
+    </formly-form>
+    </fieldset>
+ 
+</form>
+
+
+
+</kendo-dialog>
+
+<kendo-dialog title="Please confirm" *ngIf="d" (close)="close()" [minWidth]="250" [width]="450">
+  <p style="margin: 30px; text-align: center;">voulez-vous supprimer ce poste?</p>
   <kendo-dialog-actions>
-      <button kendoButton (click)="close()">No</button>
-      <button kendoButton (click)="close()" [primary]="true">Yes</button>
+      <button kendoButton (click)="delete()" [primary]="true">Supprimer</button>
+      <button kendoButton (click)="close()">Annuler</button>
   </kendo-dialog-actions>
 </kendo-dialog>
