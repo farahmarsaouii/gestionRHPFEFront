@@ -7,10 +7,12 @@
           <p>touts les disponibles a <b>New access</b> :</p>
          
         </div>
-  </div><button kendoButton look="outline" [primary]="true" *ngIf="!opened" (click)="open()">Ajouter poste</button></div>
+  </div>
 
-<div *ngIf="!opened">
-  <section class="content" *ngFor="let poste of postes" >
+  <button kendoButton look="outline" [primary]="true">Ajouter poste</button></div>
+<br>
+<div>
+  <section class="content" *ngFor="let poste of postes">
     <div class="container-fluid">
       <!-- COLOR PALETTE -->
       <div class="card card-default color-palette-box">
@@ -25,9 +27,7 @@
 
 </div>
 </div>
-
- </section>  
- </div>
+ </section> </div> 
  </main>
  <kendo-dialog title="Please confirm" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="450">
   <p style="margin: 30px; text-align: center;">Are you sure you want to continue?</p>
