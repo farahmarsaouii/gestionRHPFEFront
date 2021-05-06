@@ -26,7 +26,7 @@ import { DocumentAdministratifComponent } from './document-administratif/documen
 import { ListViewModule } from '@progress/kendo-angular-listview';
 import { LayoutModule } from '@progress/kendo-angular-layout';
 import { IconsModule } from '@progress/kendo-angular-icons';
-import { WindowModule } from '@progress/kendo-angular-dialog';
+import { WindowModule, DialogsModule } from '@progress/kendo-angular-dialog';
 import { InfoDocumentAdministratifComponent } from './info-document-administratif/info-document-administratif.component';
 import { DocumentsService } from 'src/services/documents-service';
 import { HistoriqueDemandeComponent } from './historique-demande/historique-demande.component';
@@ -90,6 +90,7 @@ import { CompetencePosteComponent } from './competence-poste/competence-poste.co
     IconsModule,
     WindowModule,
     PDFExportModule,
+    DialogsModule,
     //FormlyBootstrapModule,
    
   ],

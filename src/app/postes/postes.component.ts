@@ -12,6 +12,9 @@ export class PostesComponent implements OnInit {
 
   constructor(private posteService:PosteService,private router:Router) { }
   postes!:Poste[];
+  public opened = false;
+
+
   ngOnInit(): void {
     let rep = this.posteService.getPostes().subscribe((data) => {
       this.postes = data;
@@ -22,4 +25,12 @@ export class PostesComponent implements OnInit {
     this.router.navigate(['/home/competencePoste',poste.id]);
 
   }
+  public close() {
+
+    this.opened = false;
+}
+  public open() {
+    this.opened = true;
+}
+
 }
