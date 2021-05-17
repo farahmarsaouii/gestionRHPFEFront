@@ -54,6 +54,11 @@ import { FactureComponent } from './facture/facture.component';
 import { UploadModule } from '@progress/kendo-angular-upload';
 import { EditorModule } from '@progress/kendo-angular-editor';
 import { ToolBarModule } from '@progress/kendo-angular-toolbar';
+import { UploadsModule } from '@progress/kendo-angular-upload';
+import { DialogModule } from '@progress/kendo-angular-dialog';
+import { CommonModule } from '@angular/common';
+
+
 
 
 
@@ -89,6 +94,9 @@ import { ToolBarModule } from '@progress/kendo-angular-toolbar';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
+    UploadsModule,
+    DialogModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,

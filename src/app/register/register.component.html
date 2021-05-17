@@ -63,11 +63,7 @@
         <legend class="k-form-legend">voulez vous ajouter un utilisateur  </legend>
     <formly-form [form]="userform" [fields]="userFields" [model]="userModel">
 
-      <kendo-fileselect
-      [restrictions]="fileRestrictions"
-      (select)="selectEventHandler($event)"
-    
-    >
+      <kendo-fileselect (select)="selectEventHandler($event)">
     </kendo-fileselect>
 
         <div class="float-right">

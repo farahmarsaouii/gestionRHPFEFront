@@ -43,10 +43,11 @@
     "@progress/kendo-angular-pdf-export": "^3.0.0",
     "@progress/kendo-angular-popup": "^4.0.0",
     "@progress/kendo-angular-progressbar": "^2.0.0",
+    "@progress/kendo-angular-toolbar": "^4.0.0",
     "@progress/kendo-angular-treeview": "^5.0.0",
     "@progress/kendo-angular-upload": "^7.1.1",
     "@progress/kendo-data-query": "^1.0.0",
-    "@progress/kendo-drawing": "^1.5.12",
+    "@progress/kendo-drawing": "^1.9.3",
     "@progress/kendo-licensing": "^1.0.2",
     "@progress/kendo-svg-icons": "^0.1.2",
     "@progress/kendo-theme-default": "^4.36.0",
@@ -57,11 +58,10 @@
     "popper.js": "^1.16.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
-    "zone.js": "~0.11.3",
-    "@progress/kendo-angular-toolbar": "^4.0.0"
+    "zone.js": "~0.11.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1102.5",
+    "@angular-devkit/build-angular": "^12.0.0",
     "@angular/cli": "^11.2.10",
     "@angular/compiler-cli": "~11.2.6",
     "@types/jasmine": "~3.6.0",

@@ -216,8 +216,8 @@ options: FormlyFormOptions = {};
         this.equipeService.getEquipe(user.equipe.value).subscribe((data)=>{this.userBack.equipe=data;
         this.posteService.getPoste(user.poste.value).subscribe(
           (data)=>{this.userBack.poste=data;
-            formData.append('user',JSON.stringify(this.userBack));
-            formData.append('file',this.image);
+           formData.append('user',JSON.stringify(this.userBack));
+           formData.append('file',this.image);
           this.authenticationService.register(formData)
           .subscribe((data)=>{
             this.msg=data;
@@ -271,7 +271,7 @@ console.log(user);
     };
 
     
-    public selectEventHandler(e: SelectEvent): void {
+    public selectEventHandler(e:any): void {
     
        /* if(e.target.files.length < 0)
       { const img=e.target.files[0];
@@ -288,7 +288,7 @@ console.log(user);
       }*/
       const that = this;
       this.image=e.files[0];
-      e.files.forEach((file) => {
+      e.files.forEach((file:any) => {
         console.log(`File selected: ${file.name}`);
   
        if (!file.validationErrors) {
