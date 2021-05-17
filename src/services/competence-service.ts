@@ -11,7 +11,10 @@ export class CompetenceService {
     getCompetences(): Observable<Competence[]> {
         return this.http.get<Competence[]>(this.host + "competences");
     }
-    
+    getCompetence(id:any): Observable<Competence> {
+        let params =new HttpParams().set('competence-id',id)
+         return this.http.get<Competence>(this.host+"competenceById",{params});
+     }
     addCompetence(Competence:any){
         return this.http.post(this.host+"add-competence",Competence); 
     }
@@ -27,6 +30,9 @@ export class CompetenceService {
         return this.http.get<Competence[]>(this.host +"findCompetencesByPoste",{params});
     }
 
-
+    getCompetencesParPostParuser(idUser:any): Observable<Competence[]> {
+        let params =new HttpParams().set('idUser',idUser)
+        return this.http.get<Competence[]>(this.host +"competencesparpostparuser",{params});
+    }
    
 }

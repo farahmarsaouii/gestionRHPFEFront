@@ -1,57 +1,107 @@
-
-<!---<div class="example-wrap">
-    <form class="k-form" [formGroup]="registerForm">
-        <fieldset class="k-form-fieldset">
-            <legend class="k-form-legend">Ajout utilisateur </legend>
-            <kendo-formfield>
-                <kendo-label [for]="firstName" text="Nom :"></kendo-label>
-                <input formControlName="firstName" kendoTextBox #firstName required/>
-
-                <kendo-formhint></kendo-formhint>
-                <kendo-formerror>Error: First name is required</kendo-formerror>
-            </kendo-formfield>
-
-            <kendo-formfield>
-                <kendo-label [for]="lastName" text="Prénom :"></kendo-label>
-                <input formControlName="lastName" kendoTextBox #lastName required/>
-
-                <kendo-formhint>Prénom</kendo-formhint>
-                <kendo-formerror>Error: Last name is required</kendo-formerror>
-            </kendo-formfield>
-
-           
-
-
-            <kendo-formfield>
-                <kendo-label [for]="email" text="Email"></kendo-label>
-                <input formControlName="email" kendoTextBox #email required/>
-
-                <kendo-formhint>Email :</kendo-formhint>
-                <kendo-formerror>Error: Not valid email format</kendo-formerror>
-            </kendo-formfield>
-
-
-            <div class="k-form-buttons">
-                <button class="k-button k-primary" (click)="submitForm()">Submit</button>
-                <button class="k-button" (click)="clearForm()">Clear</button>
-            </div>
-        </fieldset>
-    </form>
+<main class="page-content">
+  <div class="container">
+    <h4>Utilisateurs</h4>
+    <hr>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <p>touts les utilisateurs a <b>New access</b> :</p>
+       
+      </div>
 </div>
-<br>-->
 
+<button kendoButton look="outline" [primary]="true" (click)="open()">Ajouter utilisateur</button></div>
+<br>
+<div>
 
+<kendo-grid [kendoGridBinding]="users" 
 
-<form [formGroup]="Userform" class ="k-form" (ngSubmit)="register(UserModel)">
+[sortable]="true"
+[pageable]="{
+ buttonCount:3,
+ pageSizes:[5,8,10]
+ }"
+[pageSize]="10"
+[height]="410">
+  
+   <kendo-grid-column field="userName" title="NOM ET PRENOM"
+   [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em'}">
+   </kendo-grid-column>
+
+   <kendo-grid-column field="cin" title="CIN"
+   [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em'}">
+   </kendo-grid-column>
+
+   <kendo-grid-column field="email" title="EMAIL"
+   [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em'}">
+   </kendo-grid-column>
+
+   <kendo-grid-column field="role.role" title="ROLE"
+   [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em'}">
+   </kendo-grid-column>
+
+   <kendo-grid-column field="equipe.nomEquipe" title="EQUIPE"
+   [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em'}">
+   </kendo-grid-column>
+  
+   <kendo-grid-column title="ACTION"
+   [class]="{'text-center': true}"
+   [resizable]="false"
+   [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em'}">
+   <ng-template kendoGridCellTemplate let-dataItem>
+    <button kendoButton icon="edit" look="outline" [primary]="true"  (click)="openedit(dataItem)" ></button>
+   <button kendoButton icon="delete" look="outline" [primary]="true" (click)="openDelete(dataItem)"></button>
+</ng-template>
+   </kendo-grid-column>
+   
+</kendo-grid>
+</div>
+</main>
+
+<kendo-dialog title="Ajout utilisateur" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="650">
+  <form [formGroup]="userform" class ="k-form">
     <fieldset class="k-form-fieldset">
-        <legend class="k-form-legend">Ajout utilisateur </legend>
-    <formly-form [form]="Userform" [fields]="UserFields" [options]="options" [model]="UserModel">
-        <div class="k-form-buttons">
-      <button type="submit" class="k-button" [disabled]="Userform.invalid">Enregistrer</button>
-    </div>
-    <p>{{UserModel| json}} </p>
+        <legend class="k-form-legend">voulez vous ajouter un utilisateur  </legend>
+    <formly-form [form]="userform" [fields]="userFields" [model]="userModel">
 
+      <kendo-fileselect
+      [restrictions]="fileRestrictions"
+      (select)="selectEventHandler($event)"
+    
+    >
+    </kendo-fileselect>
+
+        <div class="float-right">
+            <div class="k-form-buttons">
+              <button kendoButton (click)="ajouter(userModel)" [primary]="true">Ajouter</button>
+              <button kendoButton (click)="close()" >Annuler</button>
+            </div>
+        </div>
     </formly-form>
-    </fieldset>
-  </form>
+    </fieldset> 
+</form>
+</kendo-dialog>
 
+<kendo-dialog title="Modifier utilisateur" *ngIf="o" (close)="close()" [minWidth]="250" [width]="650">
+<form [formGroup]="userform" class ="k-form">
+  <fieldset class="k-form-fieldset">
+      <legend class="k-form-legend">voulez vous Modifier un utilisateur  </legend>
+  <formly-form [form]="userform" [fields]="userFields" [model]="userModel">
+
+      <div class="float-right">
+          <div class="k-form-buttons">
+            <button kendoButton (click)="updateUser(userModel)" [primary]="true">Modifier</button>
+            <button kendoButton (click)="close()" >Annuler</button>
+          </div>
+      </div>
+  </formly-form>
+  </fieldset>
+</form>
+</kendo-dialog>
+
+<kendo-dialog title="Please confirm" *ngIf="d" (close)="close()" [minWidth]="250" [width]="450">
+<p style="margin: 30px; text-align: center;">voulez-vous supprimer cet utilisateur?</p>
+<kendo-dialog-actions>
+    <button kendoButton (click)="delete()" [primary]="true">Supprimer</button>
+    <button kendoButton (click)="close()">Annuler</button>
+</kendo-dialog-actions>
+</kendo-dialog>

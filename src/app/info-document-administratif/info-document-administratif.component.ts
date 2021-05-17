@@ -9,6 +9,12 @@ import { AuthenticationService } from 'src/services/authentication-service';
 import { DemandeDocumentsService } from 'src/services/demandeDocuments-service';
 import { DocumentsService } from 'src/services/documents-service';
 
+import * as pdfMake from "pdfmake/build/pdfmake";
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { TDocumentDefinitions } from 'pdfmake/interfaces';
+
+(pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
+
 
 @Component({
   selector: 'app-info-document-administratif',
@@ -17,11 +23,12 @@ import { DocumentsService } from 'src/services/documents-service';
 })
 
 export class InfoDocumentAdministratifComponent implements OnInit {
-  public opened = false;
+
   user: User = new User;
   msg!: any;
   demande: DemandeDocumentAdministratif = new DemandeDocumentAdministratif;
   document: DocumentAdministratif = new DocumentAdministratif;
+  docDefinition!: TDocumentDefinitions;
   constructor(private route: ActivatedRoute, private docService: DocumentsService, private demandes: DemandeDocumentsService, private userservice: AuthenticationService) { }
 
   ngOnInit(): void {
@@ -95,13 +102,43 @@ export class InfoDocumentAdministratifComponent implements OnInit {
 
 
   ];
-
-  public close() {
-    this.opened = false;
-  }
-
-  public open() {
-    this.opened = true;
-  }
-
+   
+   generatePDF(b:string) {  
+     console.log(b);
+   this.docDefinition = {  
+      content: [  
+        // Previous configuration  
+        {  
+            text: 'Customer Details',  
+            style: [ 'header', 'anotherStyle' ]  
+        },
+        {text : this.document.contenuDocument},
+        {text :this.document.footerDocument},
+        {text :this.document.nomDocument},
+        {text :this.document.titreDocument},
+        {text :this.document.headerDocument},
+    ],  
+    styles: {  
+      header: {
+        fontSize: 22,
+        bold: true
+      },
+      anotherStyle: {
+        italics: true,
+        alignment: 'right'
+      }
+    }  
+  }  ;
+   
+ 
+    switch (b) {
+      case 'open': pdfMake.createPdf(this.docDefinition).open(); break;
+      case 'print': pdfMake.createPdf(this.docDefinition).print(); break;
+      case 'download': pdfMake.createPdf(this.docDefinition).download(); break;
+      default: pdfMake.createPdf(this.docDefinition).open(); break;
+    }
+  
+  }  
+ 
+  
 }

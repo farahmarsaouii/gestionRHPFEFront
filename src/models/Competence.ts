@@ -1,15 +1,18 @@
 
 import { PlanDeCarriere } from "./PlanDeCarriere";
+import { Poste } from "./Poste";
 import { SousCompetence } from "./SousCompetence";
+import { User } from "./user";
 
 export class Competence{
     id!:number;
     type!:string;
     nomCompetence!:string;
-    evaluation!: Boolean;
     niveau!:string;
     sousCompetences!:Array<SousCompetence>;
-    planDeCarriere !:PlanDeCarriere;
+    poste!:Poste;
+    rh!:User;
+    
 
 
 }

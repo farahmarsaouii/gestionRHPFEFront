@@ -13,6 +13,9 @@ export class EquipeService {
     getEquipes(): Observable<Equipe[]> {
         return this.http.get<Equipe[]>(this.host + "equipes");
     }
-  
+    getEquipe(id:any): Observable<Equipe> {
+        let params =new HttpParams().set('equipe-id',id)
+         return this.http.get<Equipe>(this.host+"equipe",{params});
+     }
 
 }

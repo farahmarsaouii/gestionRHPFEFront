@@ -7,9 +7,11 @@ import * as $ from 'jquery';
 })
 export class DashboardComponent implements OnInit {
  
+  privileges : Array<any> = [];
   constructor() { }
 
   ngOnInit(): void {
+    this.privileges = JSON.parse(localStorage.getItem("privilieges") || "");
     $(".sidebar-dropdown > a").on("click",function() {
       $(".sidebar-submenu").slideUp(200);
       if (
@@ -39,6 +41,15 @@ export class DashboardComponent implements OnInit {
       $(".page-wrapper").addClass("toggled");
     });
     
+  }
+
+  hasPrivilege(privilege : string) : boolean{
+    for(let p of this.privileges){
+      if(p.authority == privilege){
+        return true
+      }
+    }
+    return false;
   }
 
 }

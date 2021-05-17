@@ -46,6 +46,20 @@ import { PlanDeCarriereUserComponent } from './plan-de-carriere-user/plan-de-car
 import { EquipeService } from 'src/services/equipe-service';
 import { PostesComponent } from './postes/postes.component';
 import { CompetencePosteComponent } from './competence-poste/competence-poste.component';
+import { GridModule } from '@progress/kendo-angular-grid';
+import { RoleService } from 'src/services/role-service';
+import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
+import { PrivilegeService } from 'src/services/privilege-service';
+import { FactureComponent } from './facture/facture.component';
+import { UploadModule } from '@progress/kendo-angular-upload';
+import { EditorModule } from '@progress/kendo-angular-editor';
+import { ToolBarModule } from '@progress/kendo-angular-toolbar';
+
+
+
+
+
+
 
 
 
@@ -70,7 +84,8 @@ import { CompetencePosteComponent } from './competence-poste/competence-poste.co
     EquipeManagerComponent,
     PlanDeCarriereUserComponent,
     PostesComponent,
-    CompetencePosteComponent
+    CompetencePosteComponent,
+    FactureComponent
   ],
   imports: [
     BrowserModule,
@@ -91,12 +106,17 @@ import { CompetencePosteComponent } from './competence-poste/competence-poste.co
     WindowModule,
     PDFExportModule,
     DialogsModule,
+    GridModule,
+    DropDownsModule,
+    UploadModule,
+    EditorModule,
+    ToolBarModule,
     //FormlyBootstrapModule,
    
   ],
   providers: [AuthenticationService,ControlService,DocumentsService,DemandeDocumentsService,
     CompetenceService,FactureService,PlanDeCarriereService,PosteService,SousCompetenceService,
-    TypeFactureService,EquipeService],
+    TypeFactureService,EquipeService,RoleService,PrivilegeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

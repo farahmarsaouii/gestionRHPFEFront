@@ -15,11 +15,11 @@ export class AuthenticationService {
     private jwtToken: string | null = null;
     private roleUser: string | null = null;
     private privileges: Array<any> = [];
-    
-   
+
+
     jwt: string = "";
     username: string = "";
-    user!:User;
+    user!: User;
     //    role:any ="";
 
     constructor(private http: HttpClient) {
@@ -29,60 +29,80 @@ export class AuthenticationService {
         return this.http.post(this.host + "login", user, { observe: 'response' });
     }
 
-    register(user: User) {
-        return this.http.post(this.host + "register",user, { observe: 'response' });
+    register(user: FormData) {
+        return this.http.post(this.host + "register", user, { observe: 'response' });
     }
     saveToken(jwt: string) {
         this.jwtToken = jwt;
         localStorage.setItem("tokenUser", this.jwtToken);
         let jwtHelper = new JwtHelperService();
-        this.username= jwtHelper.decodeToken(this.jwtToken).sub;
-        localStorage.setItem('user', jwtHelper.decodeToken(this.jwtToken).sub);
-      
-       
+        let decodedToken = jwtHelper.decodeToken(this.jwtToken);
+        this.username = decodedToken.sub;
+        localStorage.setItem('user', this.username);
+        console.log(decodedToken);
+        this.privileges = decodedToken.privileges;
+        localStorage.setItem("privilieges", JSON.stringify(this.privileges));
+
         // localStorage.setItem('privilege', jwtHelper.decodeToken(this.jwtToken).privileges);
-      //  this.privileges = jwtHelper.decodeToken(this.jwtToken).privileges[1]['authority'];
+        //  this.privileges = jwtHelper.decodeToken(this.jwtToken).privileges[1]['authority'];
         //this.privileges = jwtHelper.decodeToken(this.jwtToken).privileges[0]['authority'];
         //console.log("=============== "+this.privileges);
         //localStorage.setItem('**** collection ',jwtHelper.decodeToken(this.jwtToken).privileges);
-     }
-    
+
+    }
+
+
 
     getTasks() {
         if (this.jwtToken == null)
             this.loadToken();
-            let headers =new HttpHeaders().set('Authorization' , localStorage.getItem('tokenUser') || []); 
-        return this.http.get(this.host + "tasks", {headers});
+        let headers = new HttpHeaders().set('Authorization', localStorage.getItem('tokenUser') || []);
+        return this.http.get(this.host + "tasks", { headers });
     }
 
 
-   /* httpOptions = {
-        headers: new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem('tokenUser') || []
+    /* httpOptions = {
+         headers: new HttpHeaders({
+             'Content-Type': 'application/json',
+             'Authorization': localStorage.getItem('tokenUser') || []
+          
+         }),
          
-        }),
-        
-    };*/
-    
-   // saveTask(task: any) {
+     };*/
+
+    // saveTask(task: any) {
     //    let headers =new HttpHeaders().set('Authorization' , localStorage.getItem('tokenUser') || []);
-   //     return this.http.post(this.host + "tasks", task, {headers});
-  //  }
-    findUserByUserName(usernameu:string): Observable<User>{
-        let headers =new HttpHeaders().set('Authorization' , localStorage.getItem('tokenUser') || []);
-        return this.http.get<User>(this.host + "userbyUsername/"+usernameu,{headers});
+    //     return this.http.post(this.host + "tasks", task, {headers});
+    //  }
+    findUserByUserName(usernameu: string): Observable<User> {
+        let headers = new HttpHeaders().set('Authorization', localStorage.getItem('tokenUser') || []);
+        return this.http.get<User>(this.host + "userbyUsername/" + usernameu, { headers });
     }
-    findUsersByEquipeAndRole(idequipe:any): Observable<User[]>{
-        let headers =new HttpHeaders().set('Authorization' , localStorage.getItem('tokenUser') || []);
-        let params =new HttpParams().set('idequipe',idequipe);
-        return this.http.get<User[]>(this.host + "getByEquipeAndRole",{params,headers});
+    findUsers(): Observable<User[]> {
+        return this.http.get<User[]>(this.host + "users");
     }
-  findRoles(): Observable<Role[]>{
-    let headers =new HttpHeaders().set('Authorization' , localStorage.getItem('tokenUser') || []);
-    return this.http.get<Role[]>(this.host + "getRoles");
-  
-  }
+    editUser(user:any){
+        return this.http.put(this.host+"updateUser",user); 
+    }
+    deleteUser(idUser:any){
+        return this.http.delete(this.host+"removeUser/"+idUser); 
+    }
+    findUsersByEquipeAndRole(idequipe: any): Observable<User[]> {
+        let headers = new HttpHeaders().set('Authorization', localStorage.getItem('tokenUser') || []);
+        let params = new HttpParams().set('idequipe', idequipe);
+        return this.http.get<User[]>(this.host + "getByEquipeAndRole", { params, headers });
+    }
+    findRoles(): Observable<Role[]> {
+        let headers = new HttpHeaders().set('Authorization', localStorage.getItem('tokenUser') || []);
+        return this.http.get<Role[]>(this.host + "getRoles");
+
+    }
+    findUser(idUser:any): Observable<User>{
+        let params = new HttpParams().set('user-id', idUser);
+        return this.http.get<User>(this.host + "getUserById",{params});
+
+    }
+   
     loadToken() {
         this.jwtToken = localStorage.getItem('tokenUser');
         return this.jwtToken;
@@ -117,6 +137,6 @@ export class AuthenticationService {
         } return false;
     }
 
-   
+
 
 }

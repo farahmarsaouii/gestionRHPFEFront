@@ -4,7 +4,7 @@
       <hr>
       <div class="row">
         <div class="form-group col-md-12">
-          <p>touts les disponibles a <b>New access</b> :</p>
+          <p>touts les postes disponibles a <b>New access</b> :</p>
          
         </div>
   </div>
@@ -12,9 +12,13 @@
   <button kendoButton look="outline" [primary]="true" (click)="open()">Ajouter poste</button></div>
 <br>
 <div>
-  <section class="content" *ngFor="let poste of postes">
+
+
+
+
+ <!-- <section class="content" *ngFor="let poste of postes">
     <div class="container-fluid">
-      <!-- COLOR PALETTE -->
+
       <div class="card card-default color-palette-box">
         <div class="card-body">
             <span class="float-left">
@@ -30,7 +34,40 @@
 
 </div>
 </div>
- </section> </div> 
+ </section> 
+-->
+ <kendo-grid [kendoGridBinding]="postes" 
+
+ [sortable]="true"
+ [pageable]="{
+   buttonCount:3,
+   pageSizes:[5,8,10]
+   }"
+ [pageSize]="10"
+ [height]="410">
+     <kendo-grid-column field="id" title="ID"
+      [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em'}">
+     </kendo-grid-column>
+
+     <kendo-grid-column field="nomPoste" title="NOM POSTE"
+     [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em'}">
+     </kendo-grid-column>
+      
+    
+     <kendo-grid-column title="ACTION"
+     [class]="{'text-center': true}"
+     [resizable]="false"
+     [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em'}">
+     <ng-template kendoGridCellTemplate let-dataItem>
+      
+      <button kendoButton look="outline" [primary]="true" (click)="competences(dataItem)" >Competences</button>
+      <button kendoButton icon="edit" look="outline" [primary]="true"  (click)="openedit(dataItem)" ></button>
+     <button kendoButton icon="delete" look="outline" [primary]="true" (click)="openDelete(dataItem)"></button>
+  </ng-template>
+     </kendo-grid-column>
+     
+ </kendo-grid>
+ </div>
  </main>
  <kendo-dialog title="Ajout poste" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="450">
 

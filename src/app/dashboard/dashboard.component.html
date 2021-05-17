@@ -60,6 +60,13 @@
             </a>
 
           </li>
+          <li class="sidebar-dropdown">
+            <a routerLink="/home/facture">
+              <i class="k-icon k-i-inherited"></i>
+              <span>Factures</span>
+            </a>
+
+          </li>
 
           <li class="sidebar-dropdown">
            
@@ -91,7 +98,7 @@
               </ul>
             </div>
 </li>
-<li class="sidebar-dropdown">
+<li class="sidebar-dropdown" *ngIf="hasPrivilege('viewPlanCarriere')">
   <a routerLink="/home/planDeCarriere">
     <i class="k-icon k-i-page-header-section"></i>
     <span>plan de carriere</span>

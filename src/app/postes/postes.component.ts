@@ -32,8 +32,8 @@ export class PostesComponent implements OnInit {
 
   }
   posteform = new FormGroup({});
- // posteModel = new Poste();
-  posteModel = this.poste;
+ posteModel = new Poste();
+  //posteModel = this.poste;
   posteFields: FormlyFieldConfig[] = [
 
     {
@@ -82,24 +82,34 @@ this.o=false;
 ajouter(poste:any){
   this.posteService.addPoste(poste).subscribe((data)=>{
     this.msg=data;
+    this.ngOnInit();
+    this.opened = false;
    });
-   this.opened = false;
+  
   
 }
 
 
-ModifierPoste(poste : any){
-this.posteService.editPoste(poste).subscribe((data)=>{
+ModifierPoste(poste : Poste){
+  console.log("************"+this.poste.id+"*****************************"+poste.nomPoste);
+  this.poste.nomPoste=poste.nomPoste;
+  this.poste.descriptionPoste=poste.descriptionPoste;
+
+this.posteService.editPoste(this.poste).subscribe((data)=>{
   this.msg=data;
+  this.ngOnInit();
+  this.o = false;
  });
- this.o = false;
+ 
 }
 
 delete(){
   this.posteService.deletePoste(this.poste.id).subscribe((data)=>{
     this.msg=data;
+    this.ngOnInit();
+    this.d=false;
+
    });
-   this.d=false;
   }
 
 

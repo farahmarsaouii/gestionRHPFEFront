@@ -7,23 +7,119 @@
           <p>les <b>Competences</b> associé au poste <b></b> :</p>
          
         </div>
-  </div></div>
+  </div>
+  <button kendoButton look="outline" [primary]="true" (click)="open()">Ajouter competence</button></div>
+  <br>
 
 
-  <section class="content" *ngFor="let competence of competences">
+ <!-- <section class="content" *ngFor="let competence of competences">
     <div class="container-fluid">
-      <!-- COLOR PALETTE -->
+    
       <div class="card card-default color-palette-box">
         <div class="card-body">
             <span class="float-left">
-            <h6>{{competence.nomCompetence}}</h6></span>
+            <h6>{{competence.nomCompetence}}</h6>
+            <h6>{{competence.niveau}}</h6></span>
             <span class="float-right">
                
+                <button kendoButton icon="edit" look="outline" [primary]="true"  (click)="openedit(competence)" ></button>
+                <button kendoButton icon="delete" look="outline" [primary]="true" (click)="openDelete(competence)"></button>
+
               </span>
           
         </div>
 
 </div>
 </div>
- </section>  
+ </section>  -->
+
+
+ 
+ <kendo-grid [kendoGridBinding]="competences" 
+
+ [sortable]="true"
+ [pageable]="{
+   buttonCount:3,
+   pageSizes:[5,8,10]
+   }"
+ [pageSize]="10"
+ [height]="410">
+     <kendo-grid-column field="id" title="ID"
+      [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em'}">
+     </kendo-grid-column>
+
+     <kendo-grid-column field="nomCompetence" title="NOM COMPETENCE"
+     [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em'}">
+     </kendo-grid-column>
+
+     <kendo-grid-column field="niveau" title="NIVEAU"
+     [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em'}">
+     </kendo-grid-column>
+      
+    
+     <kendo-grid-column title="ACTION"
+     [class]="{'text-center': true}"
+     [resizable]="false"
+     [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em'}">
+     <ng-template kendoGridCellTemplate let-dataItem>
+      <button kendoButton icon="edit" look="outline" [primary]="true"  (click)="openedit(dataItem)" ></button>
+      <button kendoButton icon="delete" look="outline" [primary]="true" (click)="openDelete(competence)"></button>
+        </ng-template>
+     </kendo-grid-column>
+     
+ </kendo-grid>
  </main>
+
+
+ <kendo-dialog title="Ajout competence" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="450"> 
+  <form [formGroup]="competenceform" class ="k-form">
+    <fieldset class="k-form-fieldset">
+        <legend class="k-form-legend">voulez vous ajouter une competence</legend>
+    <formly-form [form]="competenceform" [fields]="competenceFields" [model]="competenceModel">
+
+        <div class="float-right">
+            <div class="k-form-buttons">
+              <button kendoButton (click)="ajouter(competenceModel)" [primary]="true">Ajout</button>
+              <button kendoButton (click)="close()" >Annuler</button>
+            </div>
+        </div>
+
+    </formly-form>
+    </fieldset>
+ 
+</form>
+
+
+
+</kendo-dialog>
+<kendo-dialog title="Modifier competence" *ngIf="o" (close)="close()" [minWidth]="250" [width]="450">
+
+
+<form [formGroup]="competenceform" class ="k-form">
+  <fieldset class="k-form-fieldset">
+      <legend class="k-form-legend">voulez vous Modifier une competence  </legend>
+  <formly-form [form]="competenceform" [fields]="competenceFields" [model]="competenceModel">
+
+      <div class="float-right">
+          <div class="k-form-buttons">
+            <button kendoButton (click)="Modifiercompetence(competenceModel)" [primary]="true">Modifier</button>
+            <button kendoButton (click)="close()" >Annuler</button>
+          </div>
+      </div>
+
+  </formly-form>
+  </fieldset>
+
+</form>
+
+
+
+</kendo-dialog>
+
+<kendo-dialog title="Please confirm" *ngIf="d" (close)="close()" [minWidth]="250" [width]="450">
+<p style="margin: 30px; text-align: center;">voulez-vous supprimer cette competence?</p>
+<kendo-dialog-actions>
+    <button kendoButton (click)="delete()" [primary]="true">Supprimer</button>
+    <button kendoButton (click)="close()">Annuler</button>
+</kendo-dialog-actions>
+</kendo-dialog>

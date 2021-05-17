@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { DocumentAdministratif } from 'src/models/DocumentAdministratif';
+import { User } from 'src/models/user';
+import { AuthenticationService } from 'src/services/authentication-service';
 import { DocumentsService } from 'src/services/documents-service';
 
 @Component({
@@ -10,10 +12,12 @@ import { DocumentsService } from 'src/services/documents-service';
   styleUrls: ['./add-document.component.css']
 })
 export class AddDocumentComponent implements OnInit {
-
-  constructor(private DocumentsService:DocumentsService) { }
+rh=new User();
+  constructor(private DocumentsService:DocumentsService,private authenticationService:AuthenticationService) { }
 
   ngOnInit(): void {
+    this.authenticationService.findUserByUserName(localStorage.getItem("user") || '{}')
+    .subscribe((data) => {this.rh=data;})
   }
   feedback: any = {};
   docform = new FormGroup({});
@@ -108,8 +112,10 @@ export class AddDocumentComponent implements OnInit {
   ];
    
     register(doc :DocumentAdministratif) {
-      this.docModel.dateCreation=new Date();
-            this.DocumentsService.addDocument(this.docModel)
+      console.log(this.rh);
+      doc.drh=this.rh;
+     doc.dateCreation=new Date();
+            this.DocumentsService.addDocument(doc)
             .subscribe(resp=>{
   
               this.feedback = {type: 'success', message: 'successful!'};

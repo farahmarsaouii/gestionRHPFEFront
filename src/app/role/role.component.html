@@ -1,18 +1,154 @@
-<kendo-floatingactionbutton text="add new role" [align]="{ horizontal: 'end', vertical: 'top' }">
-</kendo-floatingactionbutton>
-<br>
-<br>
+
+        <main class="page-content">
+          <div class="container">
+            <h4>Roles </h4>
+            <hr>
+            <div class="row">
+              <div class="form-group col-md-12">
+                <p>Roles des utilisateurs a <b>New access</b> :</p>
+               
+              </div>
+        </div>
+        <button kendoButton look="outline" [primary]="true" (click)="open()">Ajouter role</button></div>
+        <br>
+
+<!--<div *ngFor="let roleUser of roles">
+  <p>{{roleUser.role}}</p>
+  <div *ngFor="let p of roleUser.privileges">
+    <p>{{p.privilege}}</p>
+  </div>
+</div>-->
+<kendo-grid [kendoGridBinding]="gridData" 
+
+ [sortable]="true"
+ [pageable]="{
+   buttonCount:3,
+   pageSizes:[5,8,10]
+   }"
+ [pageSize]="10"
+ [height]="410">
+     <kendo-grid-column field="id" title="ID"
+      [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em'}">
+     </kendo-grid-column>
+
+     <kendo-grid-column field="role" title="ROLE"
+     [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em'}">
+     </kendo-grid-column>
+      
+     <kendo-grid-column field="privileges" title="PRIVILEGE"
+     [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em'}">
+   <!--  <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex"> 
+      <span *ngFor="let item of dataItem.privileges;let i = index">
+        {{item.privilege}}
+        <label *ngIf="(dataItem.privileges.length-1)>i">,</label>
+      </span>
+</ng-template>-->
+<ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex"> 
+  <span *ngFor="let item of dataItem.privileges;let i = index">
+<kendo-chip
+      
+        [label]="item.privilege"
+        [removable]="true"
+        (remove)="onDelete(item.id,dataItem.id)"
+        
+    >
+    </kendo-chip>
+  </span>
+</ng-template>
+     </kendo-grid-column>
+     <kendo-grid-column title="ACTION"
+     [class]="{'text-center': true}"
+     [resizable]="false"
+     [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em'}">
+     <ng-template kendoGridCellTemplate let-dataItem>
+    
+      <button kendoButton icon="edit" look="outline" [primary]="true"  (click)="openedit(dataItem)" ></button>
+      <button kendoButton icon="delete" look="outline" [primary]="true" (click)="openDelete(dataItem)"></button>
+
+  </ng-template>
+     </kendo-grid-column>
+     
+ </kendo-grid>
 
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Role</th>
-      <th>Permissions</th>
-      <th>Action</th>
 
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>
+
+
+
+ <kendo-dialog title="Ajout role" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="450"> 
+  <form [formGroup]="roleform" class ="k-form">
+    <fieldset class="k-form-fieldset">
+        <legend class="k-form-legend">voulez vous ajouter un role  </legend>
+    <formly-form [form]="roleform" [fields]="roleFields" [model]="roleModel">
+
+      <kendo-autocomplete
+                    #privilegelist
+                    [data]="listeprivileges"
+                    valueField="privilege"
+                    [kendoDropDownFilter]="{operator: 'contains'}"
+                    [filterable]="true"
+                    placeholder="privilege"
+                    (valueChange)="valueChange($event)"
+                >
+                </kendo-autocomplete>
+            <kendo-chip
+                *ngFor="let p of selectedPrivilege"
+                [label]="p"
+                [removable]="true"
+                (remove)="onRemove($event)"
+              >
+             </kendo-chip>
+
+        <div class="float-right">
+            <div class="k-form-buttons">
+              <button kendoButton (click)="ajouter(roleModel)" [primary]="true">Ajouter</button>
+              <button kendoButton (click)="close()" >Annuler</button>
+            </div>
+        </div>
+    </formly-form>
+    </fieldset>
+</form>
+</kendo-dialog>
+
+<kendo-dialog title="Modifier Role" *ngIf="o" (close)="close()" [minWidth]="250" [width]="650">
+<form [formGroup]="roleform" class ="k-form">
+  <fieldset class="k-form-fieldset">
+      <legend class="k-form-legend">voulez vous Modifier ce role  </legend>
+  <formly-form [form]="roleform" [fields]="roleFields" [model]="roleModel">
+    <kendo-autocomplete
+    #privilegelist
+    [data]="listeprivileges"
+    valueField="privilege"
+    [kendoDropDownFilter]="{operator: 'contains'}"
+    [filterable]="true"
+    placeholder="privilege"
+    (valueChange)="valueChange($event)"
+>
+</kendo-autocomplete>
+<kendo-chip
+*ngFor="let p of selectedPrivilege"
+[label]="p"
+[removable]="true"
+(remove)="onRemove($event)"
+>
+</kendo-chip>
+
+      <div class="float-right">
+          <div class="k-form-buttons">
+            <button kendoButton (click)="updateRole(roleModel)" [primary]="true">Modifier</button>
+            <button kendoButton (click)="close()" >Annuler</button>
+          </div>
+      </div>
+  </formly-form>
+  </fieldset>
+</form>
+</kendo-dialog>
+
+<kendo-dialog title="Please confirm" *ngIf="d" (close)="close()" [minWidth]="250" [width]="450">
+<p style="margin: 30px; text-align: center;">voulez-vous supprimer ce role?</p>
+<kendo-dialog-actions>
+    <button kendoButton (click)="delete()" [primary]="true">Supprimer</button>
+    <button kendoButton (click)="close()">Annuler</button>
+</kendo-dialog-actions>
+</kendo-dialog>
+ 

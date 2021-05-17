@@ -1,0 +1,93 @@
+<main class="page-content">
+    <div class="container">
+      <h4>Factures</h4>
+      <hr>
+      <div class="row">
+        <div class="form-group col-md-12">
+          <p>touts les factures de <b>New access</b> :</p>
+         
+        </div>
+  </div>
+  
+  <button kendoButton look="outline" [primary]="true" (click)="open()">Ajouter Factures</button></div>
+  <br>
+  <div>
+  
+  <kendo-grid [kendoGridBinding]="factures" 
+  
+  [sortable]="true"
+  [pageable]="{
+   buttonCount:3,
+   pageSizes:[5,8,10]
+   }"
+  [pageSize]="10"
+  [height]="410">
+  <kendo-grid-column field="id" title="ID"
+  [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em'}">
+  </kendo-grid-column>
+    
+     <kendo-grid-column field="nomFacture" title="NOM FACTURE"
+     [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em'}">
+     </kendo-grid-column>
+  
+  
+     <kendo-grid-column field="typeFacture.nomTypeFacture" title="TYPE FACTURE"
+     [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em'}">
+     </kendo-grid-column>
+
+    
+     <kendo-grid-column title="ACTION"
+     [class]="{'text-center': true}"
+     [resizable]="false"
+     [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em'}">
+     <ng-template kendoGridCellTemplate let-dataItem>
+      <button kendoButton icon="edit" look="outline" [primary]="true"  (click)="openedit(dataItem)" ></button>
+     <button kendoButton icon="delete" look="outline" [primary]="true" (click)="openDelete(dataItem)"></button>
+  </ng-template>
+     </kendo-grid-column>
+     
+  </kendo-grid>
+  </div>
+  </main>
+  
+  <kendo-dialog title="Ajout facture" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="650">
+    <form [formGroup]="factureform" class ="k-form">
+      <fieldset class="k-form-fieldset">
+          <legend class="k-form-legend">voulez vous ajouter une facture </legend>
+      <formly-form [form]="factureform" [fields]="factureFields" [model]="factureModel">
+  
+          <div class="float-right">
+              <div class="k-form-buttons">
+                <button kendoButton (click)="ajouter(factureModel)" [primary]="true">Ajouter</button>
+                <button kendoButton (click)="close()" >Annuler</button>
+              </div>
+          </div>
+      </formly-form>
+      </fieldset> 
+  </form>
+  </kendo-dialog>
+  
+  <kendo-dialog title="Modifier facture" *ngIf="o" (close)="close()" [minWidth]="250" [width]="650">
+  <form [formGroup]="factureform" class ="k-form">
+    <fieldset class="k-form-fieldset">
+        <legend class="k-form-legend">voulez vous Modifier une facture  </legend>
+    <formly-form [form]="factureform" [fields]="factureFields" [model]="factureModel">
+  
+        <div class="float-right">
+            <div class="k-form-buttons">
+              <button kendoButton (click)="updateFacture(factureModel)" [primary]="true">Modifier</button>
+              <button kendoButton (click)="close()" >Annuler</button>
+            </div>
+        </div>
+    </formly-form>
+    </fieldset>
+  </form>
+  </kendo-dialog>
+  
+  <kendo-dialog title="Please confirm" *ngIf="d" (close)="close()" [minWidth]="250" [width]="450">
+  <p style="margin: 30px; text-align: center;">voulez-vous supprimer cette facture?</p>
+  <kendo-dialog-actions>
+      <button kendoButton (click)="delete()" [primary]="true">Supprimer</button>
+      <button kendoButton (click)="close()">Annuler</button>
+  </kendo-dialog-actions>
+  </kendo-dialog>

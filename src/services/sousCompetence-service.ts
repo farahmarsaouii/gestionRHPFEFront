@@ -25,8 +25,8 @@ export class SousCompetenceService {
     deleteSousCompetence(id:any){
         return this.http.delete(this.host+"removeSousCompetence/"+id); 
     }
-    getSousCompetenceParCompetenceparUser(idUser:any){
+    getsousCompetencesparUser(idUser:any){
         let params =new HttpParams().set('idUser',idUser)
-         return this.http.get(this.host+"getSousCompetenceParCompetenceparUser",{params});
+         return this.http.get(this.host+"sousCompetencesparUser",{params});
      }
 }

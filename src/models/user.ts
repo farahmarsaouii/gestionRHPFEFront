@@ -4,6 +4,7 @@ import { DemandeDocumentAdministratif } from "./DemandeDocument";
 import { DocumentAdministratif } from "./DocumentAdministratif";
 import { Equipe } from "./Equipe";
 import { PlanDeCarriere } from "./PlanDeCarriere";
+import { Poste } from "./Poste";
 import { Role } from "./Role";
 
 export class User{
@@ -19,6 +20,8 @@ export class User{
     documentAdministratif!:Collection<DocumentAdministratif>;
     equipe!:Equipe;
     role!:Role;
+    poste!:Poste;
+    superieur!:User;
 
 
 /*constructor(id:number,userName:string,password:string,email:string,cin:string)

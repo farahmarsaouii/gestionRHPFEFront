@@ -7,6 +7,7 @@ import { ControlService } from '../control.service';
     import { DashboardComponent } from '../dashboard/dashboard.component'
 import { DocumentAdministratifComponent } from '../document-administratif/document-administratif.component';
 import { EquipeManagerComponent } from '../equipe-manager/equipe-manager.component';
+import { FactureComponent } from '../facture/facture.component';
 import { HistoriqueDemandeComponent } from '../historique-demande/historique-demande.component';
 import { InfoDocumentAdministratifComponent } from '../info-document-administratif/info-document-administratif.component';
 import { ListeDocumentsComponent } from '../liste-documents/liste-documents.component';
@@ -28,6 +29,7 @@ import { TestComponent } from '../test/test.component';
         { path: 'role', component: RoleComponent },
         { path: 'register', component: RegisterComponent },
         {path: 'organigram', component: OrganigramComponent},
+        {path: 'facture', component: FactureComponent},
         {path: 'document', component: DocumentAdministratifComponent},
         {path: 'demandeDocument', component: HistoriqueDemandeComponent},
         {path: 'addDocument', component: AddDocumentComponent},
